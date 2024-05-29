@@ -9,16 +9,17 @@ public class Character : MonoBehaviour
     private AudioSource audioSource;
 
     public AudioClip JumpClip;
+    public AudioClip AttackClip;
 
     public float JumpPower = 6f;
     public float Speed = 4f;
-    private bool justJump;
+    private bool justAttack, justJump;
 
     private bool isFloor;
 
     public GameObject AttackObj;
     public float AttackSpeed = 3f;
-    public AudioClip AttackClip;
+    
 
     void Start()
     {
@@ -37,7 +38,7 @@ public class Character : MonoBehaviour
 
     private void AttackCheck()
     {
-        if (Input.GetKeyDown(KeyCode.c))
+        if (Input.GetKeyDown(KeyCode.C))
         {
             justAttack = true;
         }
@@ -59,19 +60,32 @@ public class Character : MonoBehaviour
             animator.SetTrigger("Attack");
             audioSource.PlayOneShot(AttackClip);
 
-            if (spriteRenderer.flipX)
+            if (gameObject.name == "Warrior")
             {
-                GameObject obj = Instantiate(AttackObj, transform.position, Quaternion.Euler(0, 180, 0));
-                obj.GetComponent<Rigidbody2D>().AddForce(Vector2.left * AttackSpeed, ForceMode2D.Impulse);
-                Destroy(obj, 3f);
+                AttackObj.SetActive(true);
+                Invoke("SetAttackObjInactive", 0.5f);
             }
             else
             {
-                GameObject obj = Instantiate(AttackObj, transform.position, Quaternion.Euler(0, 0, 0));
-                obj.GetComponent<Rigidbody2D>().AddForce(Vector2.right * AttackSpeed, ForceMode2D.Impulse);
-                Destroy(obj, 3f);
+                if (spriteRenderer.flipX)
+                {
+                    GameObject obj = Instantiate(AttackObj, transform.position, Quaternion.Euler(0, 180, 0));
+                    obj.GetComponent<Rigidbody2D>().AddForce(Vector2.left * AttackSpeed, ForceMode2D.Impulse);
+                    Destroy(obj, 3f);
+                }
+                else
+                {
+                    GameObject obj = Instantiate(AttackObj, transform.position, Quaternion.Euler(0, 0, 0));
+                    obj.GetComponent<Rigidbody2D>().AddForce(Vector2.right * AttackSpeed, ForceMode2D.Impulse);
+                    Destroy(obj, 3f);
+                }
             }
         }
+    }
+
+    private void SetAttackObjInactive()
+    {
+        AttackObj.SetActive(false);
     }
 
     private void JumpCheck()
