@@ -13,7 +13,7 @@ public class PlayerUI : MonoBehaviour
 
     private GameObject player;
 
-    private void Start()
+    void Start()
     {
         IdText.text = GameManager.Instance.UserID;
         GameObject playerPrefab = Resources.Load<GameObject>("Characters/" + GameManager.Instance.CharacterName);

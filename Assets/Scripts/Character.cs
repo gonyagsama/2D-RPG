@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Character : MonoBehaviour
 {
@@ -16,6 +17,9 @@ public class Character : MonoBehaviour
     private bool justAttack, justJump;
 
     private bool isFloor;
+    private bool isLadder;
+    private bool isClimbing;
+    private float inputVertical;
 
     public GameObject AttackObj;
     public float AttackSpeed = 3f;
@@ -33,7 +37,17 @@ public class Character : MonoBehaviour
         Move();
         JumpCheck();
         AttackCheck();
+        ClimbingCheck();
 
+    }
+
+    private void ClimbingCheck()
+    {
+        inputVertical = Input.GetAxis("Vertical");
+        if (isLadder && Math.Abs(inputVertical) > 0)
+        {
+            isClimbing = true;
+        }
     }
 
     private void AttackCheck()
@@ -48,6 +62,20 @@ public class Character : MonoBehaviour
     {
         Jump();
         Attack();
+        Climbing();
+    }
+
+    private void Climbing()
+    {
+        if (isClimbing)
+        {
+            rigidbody2d.gravityScale = 0f;
+            rigidbody2d.velocity= new Vector2(rigidbody2d.velocity.x, inputVertical * Speed);
+        }
+        else
+        {
+            rigidbody2d.gravityScale= 1f;
+        }
     }
 
     private void Attack()
@@ -60,7 +88,7 @@ public class Character : MonoBehaviour
             animator.SetTrigger("Attack");
             audioSource.PlayOneShot(AttackClip);
 
-            if (gameObject.name == "Warrior")
+            if (gameObject.name == "Warrior(Clone)")
             {
                 AttackObj.SetActive(true);
                 Invoke("SetAttackObjInactive", 0.5f);
@@ -151,6 +179,24 @@ public class Character : MonoBehaviour
         {
             isFloor = false;
             Debug.Log("Floor is false");
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Ladder")
+        {
+            isLadder = true;
+        }
+    }
+
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Ladder")
+        {
+            isLadder = false;
+            isClimbing = false;
         }
     }
 }
