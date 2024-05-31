@@ -7,6 +7,8 @@ TagManager:
   - Floor
   - Attack
   - Ladder
+  - coin
+  - HP
   layers:
   - Default
   - TransparentFX

@@ -13,6 +13,7 @@ public class Monster : MonoBehaviour
     private Animator MonsterAnimator;
 
     public float MoveSpeed = 3f;
+    public GameObject[] ItemObj; //마나, 체력, 코인
 
     void Start()
     {
@@ -69,6 +70,12 @@ public class Monster : MonoBehaviour
         isDie = true;
         MonsterAnimator.SetTrigger("Die");
         GameManager.Instance.PlayerExp += MonsterExp;
+
+        int itemRandom = Random.Range(0, ItemObj.Length *2);
+        if (itemRandom < ItemObj.Length)
+        {
+            Instantiate(ItemObj[itemRandom], new Vector3(transform.position.x, transform.position.y, 0), Quaternion.identity);
+        }
 
         GetComponent<Collider2D>().enabled = false;
         Destroy(gameObject, 1.5f); //Die 애니메이션 재생 시간 보장
