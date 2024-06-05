@@ -14,7 +14,7 @@ public class CameraPos : MonoBehaviour
         }
         else
         {
-            transform.position = new Vector3(playerObj.transform.position.x, playerObj.transform.position.y +3, -10);
+            transform.position = new Vector3(playerObj.transform.position.x, playerObj.transform.position.y +2, -10);
         }
     }
 }

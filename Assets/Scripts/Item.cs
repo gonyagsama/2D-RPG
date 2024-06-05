@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class Item : MonoBehaviour
 {
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnCollisionEnter2D(Collider2D collision)
     {
+        Debug.Log("OnCollisionEnter2D");
         if (collision.gameObject.tag == "Player")
         {
+            Debug.Log("Ok");
             if(gameObject.tag == "Coin")
             {
                 GameManager.Instance.Coin += 10;
