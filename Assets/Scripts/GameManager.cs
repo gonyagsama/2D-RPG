@@ -6,16 +6,18 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
 
-    public string CharacterName;
+    public Define.Player SelectedPlayer;
     public string UserID;
+
+    private GameObject player;
 
     public float PlayerHP = 100f; //체력
     public float PlayerExp = 1f; //경험치
     public int Coin = 0;
     public GameObject SpawnPlayer(Transform spawnPos)
     {
-        GameObject playerPrefab = Resources.Load<GameObject>("Characters/" + GameManager.Instance.CharacterName);
-        GameObject player = Instantiate(playerPrefab, spawnPos.position, spawnPos.rotation);
+        GameObject playerPrefab = Resources.Load<GameObject>("Characters/" + SelectedPlayer.ToString());
+        player = Instantiate(playerPrefab, spawnPos.position, spawnPos.rotation);
 
         return player;
     }
