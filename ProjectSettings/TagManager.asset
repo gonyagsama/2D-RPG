@@ -9,6 +9,8 @@ TagManager:
   - Ladder
   - HP
   - Coin
+  - Damage
+  - Speed
   layers:
   - Default
   - TransparentFX

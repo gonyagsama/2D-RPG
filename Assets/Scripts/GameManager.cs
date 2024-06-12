@@ -9,11 +9,14 @@ public class GameManager : MonoBehaviour
     public Define.Player SelectedPlayer;
     public string UserID;
 
-    private GameObject player;
+    public GameObject player;
 
     public float PlayerHP = 100f; //체력
     public float PlayerExp = 1f; //경험치
     public int Coin = 0;
+
+    public int mosterCount = 0;
+
     public GameObject SpawnPlayer(Transform spawnPos)
     {
         GameObject playerPrefab = Resources.Load<GameObject>("Characters/" + SelectedPlayer.ToString());

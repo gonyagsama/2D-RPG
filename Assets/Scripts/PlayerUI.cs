@@ -8,6 +8,7 @@ public class PlayerUI : MonoBehaviour
 {
     public Image CharacterImg;
     public Text IdText;
+    public Text CoinText;
 
     public Slider HpSlider;
 
@@ -18,7 +19,7 @@ public class PlayerUI : MonoBehaviour
     {
         IdText.text = GameManager.Instance.UserID;
         player = GameManager.Instance.SpawnPlayer(spawnPos.transform);
-        
+        //CoinText.text = GameManager.Instance.
     }
  
 

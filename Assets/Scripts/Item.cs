@@ -22,6 +22,18 @@ public class Item : MonoBehaviour
                 Debug.Log("Player Coin : " + GameManager.Instance.PlayerHP);
                 Destroy(gameObject);
             }
+            else if (gameObject.tag == "Speed")
+            {
+                GameManager.Instance.player.GetComponent<Character>().Speed += 3;
+                Debug.Log("Player Speed : " + GameManager.Instance.player.GetComponent<Character>().Speed);
+                Destroy(gameObject);
+            }
+            else if (gameObject.tag == "Damage")
+            {
+                GameManager.Instance.player.GetComponent<Character>().AttackObj.GetComponent<Attack>().AttackDamage += 5;
+                Debug.Log("Player Attack Damage : " + GameManager.Instance.player.GetComponent<Character>().AttackObj.GetComponent<Attack>());
+                Destroy(gameObject);
+            }
         }
     }
 }

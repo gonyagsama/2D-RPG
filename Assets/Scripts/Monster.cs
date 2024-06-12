@@ -1,6 +1,7 @@
 using UnityEngine;
 using static UnityEngine.RuleTile.TilingRuleOutput;
 
+
 public class Monster : MonoBehaviour
 {
     public float MonsterHP = 30f;
@@ -11,6 +12,8 @@ public class Monster : MonoBehaviour
     private float TurnTime = 3f;
     private bool isDie = false;
 
+
+
     private Animator MonsterAnimator;
 
     public float MoveSpeed = 3f;
@@ -19,7 +22,9 @@ public class Monster : MonoBehaviour
     void Start()
     {
         MonsterAnimator = this.GetComponent<Animator>();
+
     }
+
     void Update()
     {
         MonsterMove();
@@ -50,6 +55,7 @@ public class Monster : MonoBehaviour
 
         if (collision.gameObject.tag == "Player")
         {
+            CameraShake.Instance.VibrateForTime(0.5f);
             MonsterAnimator.SetTrigger("Attack");
             GameManager.Instance.PlayerHP -= MonsterDamage;
         }
@@ -58,6 +64,8 @@ public class Monster : MonoBehaviour
         {
             MonsterAnimator.SetTrigger("Damage");
             MonsterHP -= collision.gameObject.GetComponent<Attack>().AttackDamage;
+
+
 
             if (MonsterHP <= 0)
             {

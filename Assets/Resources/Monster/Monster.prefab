@@ -54,6 +54,8 @@ MonoBehaviour:
   ItemObj:
   - {fileID: 2391881770918450824, guid: 31838a118681c8b4c95c581546574856, type: 3}
   - {fileID: 2815553402219970318, guid: 263d62a659356e24f89d8907af7651fd, type: 3}
+  - {fileID: 2815553402219970318, guid: ebbaf38d2648a4149863178fec7ab55a, type: 3}
+  - {fileID: 2815553402219970318, guid: 5c7cb7d95752d4249bed5535b52fe94e, type: 3}
 --- !u!212 &7147309990830787319
 SpriteRenderer:
   m_ObjectHideFlags: 0
