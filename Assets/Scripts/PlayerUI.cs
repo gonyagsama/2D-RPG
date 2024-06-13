@@ -9,6 +9,7 @@ public class PlayerUI : MonoBehaviour
     public Image CharacterImg;
     public Text IdText;
     public Text CoinText;
+    public Text MonsterCount;
 
     public Slider HpSlider;
 
@@ -19,13 +20,17 @@ public class PlayerUI : MonoBehaviour
     {
         IdText.text = GameManager.Instance.UserID;
         player = GameManager.Instance.SpawnPlayer(spawnPos.transform);
-        //CoinText.text = GameManager.Instance.
+        
     }
  
 
     private void Update()
     {
         display();
+
+        CoinText.text = "COIN : " + GameManager.Instance.Coin;
+        MonsterCount.text = "Monster : " + GameManager.Instance.mosterCount;
+
     }
 
     private void display()

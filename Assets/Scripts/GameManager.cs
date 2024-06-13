@@ -9,6 +9,8 @@ public class GameManager : MonoBehaviour
     public Define.Player SelectedPlayer;
     public string UserID;
 
+    public string CoinUp;
+
     public GameObject player;
 
     public float PlayerHP = 100f; //Ã¼·Â
@@ -42,5 +44,7 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         UserID = PlayerPrefs.GetString("ID");
+
+        CoinUp = PlayerPrefs.GetString("Coin");
     }
 }

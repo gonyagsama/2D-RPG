@@ -22,7 +22,7 @@ public class Monster : MonoBehaviour
     void Start()
     {
         MonsterAnimator = this.GetComponent<Animator>();
-
+        GameManager.Instance.mosterCount++;
     }
 
     void Update()
@@ -76,6 +76,8 @@ public class Monster : MonoBehaviour
 
     private void MonsterDie()
     {
+        GameManager.Instance.mosterCount--;
+
         isDie = true;
 
         MonsterAnimator.SetTrigger("Die");
