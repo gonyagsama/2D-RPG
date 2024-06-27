@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class MouseEvent : MonoBehaviour
 {
-    public GameObject PotionUI,PowerUI;
+    public GameObject PotionUI,PowerUI, BattleUI;
     void Update()
     {
         MouseClick();
@@ -30,7 +30,7 @@ public class MouseEvent : MonoBehaviour
                 }
                 else if (hit.collider.gameObject.name == "BattleNpc")
                 {
-                    Debug.Log("배틀엔피시 선택");
+                    BattleUI.SetActive(true);
                 }
             }
         }
