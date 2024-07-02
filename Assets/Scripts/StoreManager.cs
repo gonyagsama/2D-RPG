@@ -13,6 +13,7 @@ public class StoreManager : MonoBehaviour
     public Text ItemExplainText;
 
     private Dictionary<string, InventoryItemData> itemDictionary;
+    private string SelectedItemID;
     void Start()
     {
         itemDictionary = new Dictionary<string, InventoryItemData>();
@@ -32,11 +33,30 @@ public class StoreManager : MonoBehaviour
             ItemNameText.text = selectedItem.itemName;
             ItemCoinText.text = $"({selectedItem.itemPrice:N0} Point)";
             ItemExplainText.text = selectedItem.itemDescription;
+
+            SelectedItemID = itemID;
         }
         else
         {
             Debug.LogError("Item ID not found" + itemID);
         }
     }
+
+    public void Purchase()
+    {
+        InventoryItemData selectedItem = itemDictionary[SelectedItemID];
+        if (BackpackManager.instance.AddItem(selectedItem))
+        {
+            GameManager.Instance.Coin -= selectedItem.itemPrice;
+            Debug.Log("성공");
+        }
+        else
+        {
+            Debug.Log("q백팩에 빈 공간이 업습니다");
+        }
+        
+    }
+    
+
     
 }
