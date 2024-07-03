@@ -45,17 +45,26 @@ public class StoreManager : MonoBehaviour
     public void Purchase()
     {
         InventoryItemData selectedItem = itemDictionary[SelectedItemID];
-        if (BackpackManager.instance.AddItem(selectedItem))
+        if (GameManager.Instance.Coin >= selectedItem.itemPrice)
         {
-            GameManager.Instance.Coin -= selectedItem.itemPrice;
-            Debug.Log("성공");
+            if (BackpackManager.instance.AddItem(selectedItem))
+            {
+                GameManager.Instance.Coin -= selectedItem.itemPrice;
+                PopupMsgManager.instance.ShowPopupMessage("구매 성공");
+            }
+            else
+            {
+                PopupMsgManager.instance.ShowPopupMessage("BackPack에 빈 공간이 없습니다.");
+            }
+                    
         }
         else
         {
-            Debug.Log("q백팩에 빈 공간이 업습니다");
+            PopupMsgManager.instance.ShowPopupMessage($"잔액이 부족합니다. 잔액 : {GameManager.Instance.Coin}");
         }
         
     }
+    
     
 
     
