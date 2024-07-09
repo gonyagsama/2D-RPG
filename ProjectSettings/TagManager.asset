@@ -9,6 +9,7 @@ TagManager:
   - Ladder
   - HP
   - Coin
+  - initPos
   layers:
   - Default
   - TransparentFX

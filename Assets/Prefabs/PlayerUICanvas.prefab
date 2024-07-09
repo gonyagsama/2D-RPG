@@ -743,7 +743,8 @@ MonoBehaviour:
   CharacterImg: {fileID: 2560355558449662652}
   IdText: {fileID: 7370966654525484496}
   HpSlider: {fileID: 7325611053054452701}
-  spawnPos: {fileID: 0}
+  MPSlider: {fileID: 5645240444912796971}
+  ExpSlider: {fileID: 7387727558218802135}
 --- !u!1 &4101452086393514927
 GameObject:
   m_ObjectHideFlags: 0
