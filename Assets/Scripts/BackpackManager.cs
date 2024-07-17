@@ -30,7 +30,7 @@ public class BackpackManager : MonoBehaviour
     void Update()
     {
         BackpackUiOn();
-        CoinText.text = $"Coin: {GameManager.Instance.Coin:N0}";
+        CoinText.text = $"Coin: {GameManager.Instance.PlayerStat.Coin:N0}";
     }
 
     private void BackpackUiOn()
@@ -63,27 +63,27 @@ public class BackpackManager : MonoBehaviour
 
         if (inventoryItem.itemID == "HP")
         {
-            GameManager.Instance.PlayerHP += 10f;
-            GameManager.Instance.PlayerHP = Mathf.Min(GameManager.Instance.PlayerHP, 100f);
+            GameManager.Instance.PlayerStat.PlayerHP += 10f;
+            GameManager.Instance.PlayerStat.PlayerHP = Mathf.Min(GameManager.Instance.PlayerStat.PlayerHP, 100f);
             PopupMsgManager.instance.ShowPopupMessage("체력이 10 회복 되었습니다."); 
         }
         else if (inventoryItem.itemID == "MP")
         {
 
-            GameManager.Instance.PlayerMp += 10f;
-            GameManager.Instance.PlayerMp = Mathf.Min(GameManager.Instance.PlayerMp, 100f);
+            GameManager.Instance.PlayerStat.PlayerMp += 10f;
+            GameManager.Instance.PlayerStat.PlayerMp = Mathf.Min(GameManager.Instance.PlayerStat.PlayerMp, 100f);
             PopupMsgManager.instance.ShowPopupMessage("마나가 10 회복 되었습니다.");
         }
         else if (inventoryItem.itemID == "HP_Power")
         {
 
-            GameManager.Instance.PlayerHP += 100f;
+            GameManager.Instance.PlayerStat.PlayerHP += 100f;
             PopupMsgManager.instance.ShowPopupMessage("체력 전체가 회복 되었습니다.");
         }
         else if (inventoryItem.itemID == "MP_Power")
         {
 
-            GameManager.Instance.PlayerMp += 100f;
+            GameManager.Instance.PlayerStat.PlayerMp += 100f;
             PopupMsgManager.instance.ShowPopupMessage("마나 전체가 회복 되었습니다.");
         }
         else if (inventoryItem.itemID == "Def")
@@ -115,16 +115,16 @@ public class BackpackManager : MonoBehaviour
     IEnumerator DefItem()
     {
         defItemUsingCount++;
-        GameManager.Instance.PlayerDef *= 2;
+        GameManager.Instance.PlayerStat.PlayerDef *= 2;
         GameManager.Instance.Character.GetComponent<SpriteRenderer>().color = Color.blue;
-        Debug.Log("1. PlayerDef : " + GameManager.Instance.PlayerDef);
+        Debug.Log("1. PlayerDef : " + GameManager.Instance.PlayerStat.PlayerDef);
         yield return new WaitForSeconds(10f);
 
         defItemUsingCount--;
-        GameManager.Instance.PlayerDef /= 2;
+        GameManager.Instance.PlayerStat.PlayerDef /= 2;
         if (defItemUsingCount == 0)
             GameManager.Instance.Character.GetComponent<SpriteRenderer>().color = Color.white;
-        Debug.Log("2. PlayerDef : " + GameManager.Instance.PlayerDef);
+        Debug.Log("2. PlayerDef : " + GameManager.Instance.PlayerStat.PlayerDef);
     }
 
     IEnumerator SpeedItem()

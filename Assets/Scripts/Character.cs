@@ -1,4 +1,5 @@
 using System;
+using UnityEditor.Tilemaps;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -15,6 +16,7 @@ public class Character : MonoBehaviour
     public float JumpPower = 6f;
     public float Speed = 4f;
     private bool justAttack, justJump;
+    public bool faceRight = true;
 
     private bool isFloor;
     private bool isLadder;
@@ -95,7 +97,7 @@ public class Character : MonoBehaviour
             }
             else
             {
-                if (spriteRenderer.flipX)
+                if (!faceRight)
                 {
                     GameObject obj = Instantiate(AttackObj, transform.position, Quaternion.Euler(0, 180, 0));
                     obj.GetComponent<Rigidbody2D>().AddForce(Vector2.left * AttackSpeed, ForceMode2D.Impulse);
@@ -144,25 +146,27 @@ public class Character : MonoBehaviour
         {
             transform.Translate(Vector3.right * Speed * Time.deltaTime);
             animator.SetBool("Move", true);
+            if (!faceRight) Flip();
         }
         else if (Input.GetKey(KeyCode.LeftArrow))
         {
             transform.Translate(Vector3.left * Speed * Time.deltaTime);
             animator.SetBool("Move", true);
+            if (faceRight) Flip();
         }
         else
         {
             animator.SetBool("Move", false);
         }
-        //좌우 이동에 따른 반전
-        if (Input.GetKeyDown(KeyCode.RightArrow))
-        {
-            spriteRenderer.flipX = false;
-        }
-        else if (Input.GetKeyDown(KeyCode.LeftArrow))
-        {
-            spriteRenderer.flipX = true;
-        }
+       
+    }
+    private void Flip()
+    {
+        faceRight = !faceRight;
+
+        Vector3 localScale = transform.localScale;
+        localScale.x *= -1;
+        transform.localScale = localScale;
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
