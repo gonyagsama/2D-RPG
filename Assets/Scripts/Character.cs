@@ -25,7 +25,10 @@ public class Character : MonoBehaviour
     public GameObject AttackObj;
     public float AttackSpeed = 3f;
     
-
+    public void AttackAnimation()
+    {
+        animator.SetTrigger("Attack");
+    }
     void Start()
     {
         animator = GetComponent<Animator>();

@@ -10,6 +10,8 @@ TagManager:
   - HP
   - Coin
   - initPos
+  - TAZOFX
+  - Skill
   layers:
   - Default
   - TransparentFX
